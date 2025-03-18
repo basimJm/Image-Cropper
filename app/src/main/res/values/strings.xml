@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">image-cropper</string>
+    <string name="back">Back</string>
+    <string name="preview_test_text">Select</string>
+    <string name="permission_message">Permission is required to access the gallery</string>
+    <string name="image_selected_successfully">Image Selected Successfully</string>
+    <string name="no_image_selected">No image selected</string>
+    <string name="selected_image">Selected Image</string>
+    <string name="selected_image_from_gallery">Selected Image From Gallery</string>
+    <string name="image_type">image/*</string>
+    <string name="edit_image">Edit Image</string>
+</resources>
