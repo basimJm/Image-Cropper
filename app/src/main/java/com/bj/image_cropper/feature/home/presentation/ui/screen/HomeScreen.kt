@@ -4,7 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -46,7 +47,9 @@ fun HomeScreen(
                 Image(
                     painter = painter,
                     contentDescription = stringResource(R.string.selected_image),
-                    modifier = Modifier.size(200.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(500.dp)
                 )
             } ?: run {
                 AppText(

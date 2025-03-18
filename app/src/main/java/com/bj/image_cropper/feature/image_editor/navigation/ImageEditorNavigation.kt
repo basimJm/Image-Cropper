@@ -13,6 +13,7 @@ import org.koin.androidx.compose.koinViewModel
 
 class ImageEditorNavigation(override val navController: NavHostController) :
     AppNavigator by NavigatorDelegation(navController) {
+
     override fun registerGraph(navGraphBuilder: NavGraphBuilder) {
         navGraphBuilder.composable<Routes.ImageEditor> {
             val viewModel = koinViewModel<ImageEditorViewModel>()
