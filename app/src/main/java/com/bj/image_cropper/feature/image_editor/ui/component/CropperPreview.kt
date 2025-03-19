@@ -3,6 +3,7 @@ package com.bj.image_cropper.feature.image_editor.ui.component
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -19,6 +20,7 @@ import androidx.compose.ui.graphics.drawscope.withTransform
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.bj.image_cropper.feature.image_editor.ui.component.images.rememberLoadedImage
 import com.bj.image_cropper.feature.image_editor.ui.component.utils.ViewMat
@@ -37,7 +39,7 @@ fun CropperPreview(
     val viewMat = remember { ViewMat() }
     var view by remember { mutableStateOf(IntSize.Zero) }
     var pendingDrag by remember { mutableStateOf<DragHandle?>(null) }
-    val viewPadding = LocalDensity.current.run { style.touchRad.toPx() }
+    val viewPadding = LocalDensity.current.run { 0.dp.toPx() }
     val totalMat = remember(viewMat.matrix, imgMat) { imgMat * viewMat.matrix }
     val image = rememberLoadedImage(state.src, view, totalMat)
     val cropRect = remember(state.region, viewMat.matrix) {
@@ -51,7 +53,7 @@ fun CropperPreview(
         mat = viewMat, local = state.region,
     )
     Canvas(
-        modifier = modifier
+        modifier = modifier.fillMaxSize()
             .onGloballyPositioned { view = it.size }
             .background(color = style.backgroundColor)
             .cropperTouch(

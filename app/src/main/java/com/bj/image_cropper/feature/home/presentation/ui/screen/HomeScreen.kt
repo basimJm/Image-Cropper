@@ -1,5 +1,7 @@
 package com.bj.image_cropper.feature.home.presentation.ui.screen
 
+import android.graphics.BitmapFactory
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,7 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -42,8 +44,8 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(LocalSpacing.current.spaceMedium)
         ) {
-            state.selectedImageUri?.let {
-                val painter: Painter = rememberAsyncImagePainter(it)
+            state.imageUri?.let { imageUri ->
+                val painter = rememberAsyncImagePainter(imageUri)
                 Image(
                     painter = painter,
                     contentDescription = stringResource(R.string.selected_image),
@@ -51,6 +53,15 @@ fun HomeScreen(
                         .fillMaxWidth()
                         .height(500.dp)
                 )
+            } ?:
+            state.imagePath?.let { path ->
+                val bitmap = BitmapFactory.decodeFile(path)
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(500.dp), bitmap = bitmap.asImageBitmap(), contentDescription = null
+                )
+
             } ?: run {
                 AppText(
                     text = stringResource(R.string.no_image_selected),
@@ -59,6 +70,7 @@ fun HomeScreen(
                     )
                 )
             }
+
             AppButton(
                 modifier = Modifier.width(150.dp),
                 title = stringResource(state.buttonTextResource),
@@ -67,7 +79,7 @@ fun HomeScreen(
                     textAlign = TextAlign.Center
                 )
             ) {
-                state.selectedImageUri?.let {
+                state.imageUri?.let {
                     pushEvent(UiAction.OnNavigateToImageEditorScreen)
                 } ?: run {
                     getImage.launch(context.getString(R.string.image_type))
@@ -83,7 +95,7 @@ private fun HomeScreenPreview() {
     ImageCropperTheme {
         HomeScreen(
             state = UiState(
-                selectedImageUri = null
+                imageUri = null
             ), pushEvent = {})
     }
 }
