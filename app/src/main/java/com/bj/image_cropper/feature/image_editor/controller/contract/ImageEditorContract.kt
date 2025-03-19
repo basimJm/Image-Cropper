@@ -16,10 +16,11 @@ interface ImageEditorContract {
     )
 
     sealed interface UiAction {
-
+        data class OnCropDone(val bitmapImage: ImageBitmap) : UiAction
+        data class OnBackPressed(val imageUri: Uri) : UiAction
     }
 
     sealed interface SideEffect {
-
+        data class BackToHomeScreen(val bitmapImage: ImageBitmap?, val imageUri: Uri?) : SideEffect
     }
 }

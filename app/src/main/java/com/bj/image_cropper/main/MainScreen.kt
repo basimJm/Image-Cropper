@@ -9,6 +9,6 @@ import com.bj.image_cropper.core.shared_ui.theme.ImageCropperTheme
 @Composable
 fun MainScreen(navController: NavHostController) {
     ImageCropperTheme {
-        MainNavigation(navController = navController, startDestination = Routes.Home)
+        MainNavigation(navController = navController, startDestination = Routes.Home())
     }
 }

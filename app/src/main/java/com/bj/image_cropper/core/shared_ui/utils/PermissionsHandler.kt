@@ -37,11 +37,6 @@ fun PermissionsHandler(
         }
 
         deniedPermissions.forEach { permissionState ->
-            Log.d(
-                "PermissionsHandler",
-                "All permissions granted: ${permissionState.permission}"
-            )
-
             Rationale(
                 text = stringResource(messageResource)
             ) {

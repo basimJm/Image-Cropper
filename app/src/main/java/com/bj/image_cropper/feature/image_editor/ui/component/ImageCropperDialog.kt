@@ -35,43 +35,43 @@ private val CropperDialogProperties = (DialogProperties(
     dismissOnClickOutside = false
 ))
 
-@Composable
-fun ImageCropperDialog(
-    state: CropState,
-    style: CropperStyle = DefaultCropperStyle,
-    dialogProperties: DialogProperties = CropperDialogProperties,
-    dialogPadding: PaddingValues = PaddingValues(16.dp),
-    dialogShape: Shape = RoundedCornerShape(8.dp),
-    topBar: @Composable (CropState) -> Unit = { DefaultTopBar(it) },
-    cropControls: @Composable BoxScope.(CropState) -> Unit = { DefaultControls(it) }
-) {
-    CompositionLocalProvider(LocalCropperStyle provides style) {
-        Dialog(
-            onDismissRequest = { state.done(accept = false) },
-            properties = dialogProperties,
-        ) {
-            Surface(
-                modifier = Modifier.padding(dialogPadding),
-                shape = dialogShape,
-            ) {
-                Column {
-                    topBar(state)
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .clipToBounds()
-                    ) {
-                        CropperPreview(state = state, modifier = Modifier.fillMaxSize())
-                        cropControls(state)
-                    }
-                }
-            }
-        }
-    }
-}
+//@Composable
+//fun ImageCropperDialog(
+//    state: CropState,
+//    style: CropperStyle = DefaultCropperStyle,
+//    dialogProperties: DialogProperties = CropperDialogProperties,
+//    dialogPadding: PaddingValues = PaddingValues(16.dp),
+//    dialogShape: Shape = RoundedCornerShape(8.dp),
+//    topBar: @Composable (CropState) -> Unit = { DefaultTopBar(it) },
+//    cropControls: @Composable BoxScope.(CropState) -> Unit = { DefaultControls(it) }
+//) {
+//    CompositionLocalProvider(LocalCropperStyle provides style) {
+//        Dialog(
+//            onDismissRequest = { state.done(accept = false) },
+//            properties = dialogProperties,
+//        ) {
+//            Surface(
+//                modifier = Modifier.padding(dialogPadding),
+//                shape = dialogShape,
+//            ) {
+//                Column {
+//                    topBar(state)
+//                    Box(
+//                        modifier = Modifier
+//                            .weight(1f)
+//                            .clipToBounds()
+//                    ) {
+//                        CropperPreview(state = state, modifier = Modifier.fillMaxSize())
+//                        cropControls(state)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
 @Composable
-private fun BoxScope.DefaultControls(state: CropState) {
+ fun BoxScope.DefaultControls(state: CropState) {
     val verticalControls =
         LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
     CropperControls(
@@ -84,7 +84,7 @@ private fun BoxScope.DefaultControls(state: CropState) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun DefaultTopBar(state: CropState) {
+ fun DefaultTopBar(state: CropState) {
     TopAppBar(
         title = {},
         navigationIcon = {
@@ -93,12 +93,7 @@ private fun DefaultTopBar(state: CropState) {
             }
         },
         actions = {
-            IconButton(onClick = { state.reset() }) {
-                Icon(painterResource(R.drawable.restore), null)
-            }
-            IconButton(onClick = { state.done(accept = true) }, enabled = !state.accepted) {
-                Icon(Icons.Default.Done, null)
-            }
+
         }
     )
 }

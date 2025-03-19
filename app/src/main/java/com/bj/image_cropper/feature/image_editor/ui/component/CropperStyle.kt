@@ -89,7 +89,7 @@ public fun CropperStyle(
     backgroundColor: Color = Color.Black,
     rectColor: Color = Color.White,
     rectStrokeWidth: Dp = 2.dp,
-    touchRad: Dp = 20.dp,
+    touchRad: Dp = 10.dp,
     guidelines: CropperStyleGuidelines? = CropperStyleGuidelines(),
     secondaryHandles: Boolean = true,
     overlay: Color = Color.Black.copy(alpha = .5f),
