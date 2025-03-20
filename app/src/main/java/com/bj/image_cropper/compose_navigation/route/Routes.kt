@@ -1,13 +1,10 @@
 package com.bj.image_cropper.compose_navigation.route
 
 import android.net.Uri
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.core.net.toUri
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
-
-import kotlin.reflect.typeOf
 
 sealed interface Routes {
     @Serializable
@@ -15,7 +12,7 @@ sealed interface Routes {
         val imageUri: String? = null,
         val imagePath: String? = null,
 
-    ) : Routes {
+        ) : Routes {
         val uriObject: Uri?
             get() = imageUri?.toUri()
 

@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.bj.image_cropper.compose_navigation.route.Routes
 import com.bj.image_cropper.feature.home.presentation.navigation.HomeNavigation
-import com.bj.image_cropper.feature.image_editor.navigation.ImageEditorNavigation
+import com.bj.image_cropper.feature.image_editor.presentation.navigation.ImageEditorNavigation
 
 @Composable
 fun MainNavigation(
