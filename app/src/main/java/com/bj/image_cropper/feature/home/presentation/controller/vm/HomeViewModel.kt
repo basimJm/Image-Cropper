@@ -1,6 +1,5 @@
 package com.bj.image_cropper.feature.home.presentation.controller.vm
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,14 +12,15 @@ import com.bj.image_cropper.feature.home.presentation.controller.contract.HomeCo
 import com.bj.image_cropper.feature.home.presentation.controller.contract.HomeContract.UiState
 import kotlinx.coroutines.launch
 
-class HomeViewModel(saveStateHandle: SavedStateHandle) : ViewModel(),
+class HomeViewModel(private val saveStateHandle: SavedStateHandle) : ViewModel(),
     MVI<UiState, UiAction, SideEffect> by mvi(UiState()) {
 
     init {
+        initializeState()
+    }
+
+    private fun initializeState() {
         val passedData = Routes.Home.from(saveStateHandle)
-        passedData.uriObject?.let {
-            updateState { copy(imageUri = it) }
-        }
         passedData.imagePath?.let {
             updateState { copy(imagePath = it) }
         }

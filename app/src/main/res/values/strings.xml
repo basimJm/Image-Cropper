@@ -9,4 +9,7 @@
     <string name="selected_image_from_gallery">Selected Image From Gallery</string>
     <string name="image_type">image/*</string>
     <string name="edit_image">Edit Image</string>
+    <string name="done_icon">Done Icon</string>
+    <string name="restore_icon">restore icon</string>
+    <string name="image_path">image.*</string>
 </resources>

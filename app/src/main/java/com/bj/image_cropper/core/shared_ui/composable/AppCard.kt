@@ -24,15 +24,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.bj.image_cropper.core.shared_ui.theme.ImageCropperTheme
-import com.bj.image_cropper.core.shared_ui.utils.LocalSpacing
 
 @Composable
 fun AppCard(
     modifier: Modifier = Modifier,
     contentModifier: Modifier = Modifier,
     borderStroke: BorderStroke? = null,
-    elevation: Dp = LocalSpacing.current.defaultCardElevation,
-    cornerRadius: Dp = LocalSpacing.current.defaultCornerRadius,
+    elevation: Dp = 40.dp,
+    cornerRadius: Dp = 3.dp,
     customColor: Color = MaterialTheme.colorScheme.surface,
     customBackgroundImage: Painter? = null,
     content: @Composable BoxScope.() -> Unit,

@@ -2,7 +2,7 @@ package com.bj.image_cropper.app
 
 import android.app.Application
 import com.bj.image_cropper.feature.home.presentation.module.homePresentationModule
-import com.bj.image_cropper.feature.image_editor.module.imageEditorPresentationModule
+import com.bj.image_cropper.feature.image_editor.presentation.module.imageEditorPresentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

@@ -1,6 +1,5 @@
 package com.bj.image_cropper.feature.home.presentation.navigation
 
-import android.util.Log
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavGraphBuilder

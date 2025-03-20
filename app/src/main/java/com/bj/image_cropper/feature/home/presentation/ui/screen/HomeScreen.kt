@@ -1,13 +1,11 @@
 package com.bj.image_cropper.feature.home.presentation.ui.screen
 
 import android.graphics.BitmapFactory
-import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -25,7 +23,6 @@ import com.bj.image_cropper.core.shared_ui.composable.AppButton
 import com.bj.image_cropper.core.shared_ui.composable.AppScreen
 import com.bj.image_cropper.core.shared_ui.composable.AppText
 import com.bj.image_cropper.core.shared_ui.theme.ImageCropperTheme
-import com.bj.image_cropper.core.shared_ui.utils.LocalSpacing
 import com.bj.image_cropper.core.shared_ui.utils.Sp
 import com.bj.image_cropper.feature.home.presentation.controller.contract.HomeContract.UiAction
 import com.bj.image_cropper.feature.home.presentation.controller.contract.HomeContract.UiState
@@ -39,29 +36,27 @@ fun HomeScreen(
     val context = LocalContext.current
 
     AppScreen {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(LocalSpacing.current.spaceMedium)
+        Box(
+            modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
         ) {
             state.imageUri?.let { imageUri ->
                 val painter = rememberAsyncImagePainter(imageUri)
                 Image(
+                    modifier = Modifier
+                        .align(Alignment.TopCenter)
+                        .fillMaxWidth(),
                     painter = painter,
                     contentDescription = stringResource(R.string.selected_image),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(500.dp)
                 )
-            } ?:
-            state.imagePath?.let { path ->
-                val bitmap = BitmapFactory.decodeFile(path)
+            } ?: state.imagePath?.let { image ->
+                val bitmap = BitmapFactory.decodeFile(image)
                 Image(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(500.dp), bitmap = bitmap.asImageBitmap(), contentDescription = null
+                        .align(Alignment.TopCenter)
+                        .fillMaxWidth(),
+                    bitmap = bitmap.asImageBitmap(),
+                    contentDescription = null
                 )
-
             } ?: run {
                 AppText(
                     text = stringResource(R.string.no_image_selected),
@@ -72,7 +67,10 @@ fun HomeScreen(
             }
 
             AppButton(
-                modifier = Modifier.width(150.dp),
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(50.dp)
+                    .width(150.dp),
                 title = stringResource(state.buttonTextResource),
                 textStyle = MaterialTheme.typography.bodyLarge.copy(
                     fontSize = 12.Sp,
