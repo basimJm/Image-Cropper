@@ -21,7 +21,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.bj.image_cropper.core.domain.entity.AppBarAction
 import com.bj.image_cropper.core.shared_ui.utils.FontProvider.cairoMedium
-import com.bj.image_cropper.core.shared_ui.utils.LocalSpacing
 import com.bj.image_cropper.core.shared_ui.utils.Sp
 
 @Composable
@@ -70,7 +69,7 @@ fun AppScreen(
 
         Box(
             modifier = modifier
-                .padding(top = if (withAppBar) paddingValues.calculateTopPadding() else LocalSpacing.current.default)
+                .padding(top = if (withAppBar) paddingValues.calculateTopPadding() else 0.dp)
                 .navigationBarsPadding()
                 .fillMaxSize()
                 .background(backgroundColor),

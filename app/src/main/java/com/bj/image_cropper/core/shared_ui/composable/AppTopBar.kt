@@ -63,7 +63,7 @@ fun AppTopBar(
             actions?.forEach { action ->
                 IconButton(onClick = action.onClicked) {
                     Icon(
-                        painter = painterResource(action.iconId),
+                        imageVector =action.icon,
                         contentDescription = "",
                         tint = MaterialTheme.colorScheme.onSurface,
                     )

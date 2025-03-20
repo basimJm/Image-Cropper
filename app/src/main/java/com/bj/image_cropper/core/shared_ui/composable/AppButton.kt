@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import com.bj.image_cropper.R
 import com.bj.image_cropper.core.shared_ui.theme.ImageCropperTheme
 import com.bj.image_cropper.core.shared_ui.theme.md_theme_button_disabled
-import com.bj.image_cropper.core.shared_ui.utils.LocalSpacing
 import com.bj.image_cropper.core.shared_ui.utils.Sp
 
 @Composable
@@ -37,10 +36,10 @@ fun AppButton(
     title: String,
     enabled: Boolean = true,
     isLoading: Boolean = false,
-    buttonHeight: Dp = LocalSpacing.current.buttonHeight,
+    buttonHeight: Dp = 60.dp,
     trailingIcon: ImageVector? = null,
     leadingIcon: ImageVector? = null,
-    elevation: Dp = LocalSpacing.current.default,
+    elevation: Dp = 0.dp,
     border: BorderStroke? = null,
     textStyle: TextStyle = MaterialTheme.typography.bodyMedium.copy(
         fontSize = 22.Sp,
@@ -48,7 +47,7 @@ fun AppButton(
     ),
     textColor: Color = MaterialTheme.colorScheme.onPrimaryContainer,
     buttonColor: Color = MaterialTheme.colorScheme.primaryContainer,
-    cornerRadius: Dp = LocalSpacing.current.textFieldCornerRadius,
+    cornerRadius: Dp = 5.dp,
     onClick: () -> Unit,
 ) {
     ElevatedButton(
@@ -67,7 +66,7 @@ fun AppButton(
         ),
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(LocalSpacing.current.spaceSmall),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             if (!isLoading) {
                 leadingIcon?.let {
@@ -97,11 +96,11 @@ fun AppSecondaryButton(
     title: String,
     enabled: Boolean = true,
     isLoading: Boolean = false,
-    buttonHeight: Dp = LocalSpacing.current.buttonHeight,
+    buttonHeight: Dp = 60.dp,
     buttonColor: Color = Color.Transparent,
     buttonSecondaryColor: Color = MaterialTheme.colorScheme.primaryContainer,
-    cornerRadius: Dp = LocalSpacing.current.textFieldCornerRadius,
-    elevation: Dp = LocalSpacing.current.defaultCardElevation,
+    cornerRadius: Dp = 5.dp,
+    elevation: Dp = 40.dp,
     onClick: () -> Unit,
 ) {
     val border = BorderStroke(

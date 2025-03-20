@@ -1,7 +1,12 @@
 package com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils
 
 import androidx.compose.animation.core.animate
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.neverEqualPolicy
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Matrix
@@ -36,10 +41,13 @@ internal fun ViewMat() = object : ViewMat {
     }
 
     override fun zoom(center: Offset, scale: Float) {
+        val currentScale = this.scale
+        val newScale = (currentScale * scale).coerceIn(0.5f, 1.0f)
+        val scaleFactor = newScale / currentScale
         val s = Matrix().apply {
             translate(center.x - c0.x, center.y - c0.y)
             translate(center.x, center.y)
-            scale(scale, scale)
+            scale(scaleFactor, scaleFactor)
             translate(-center.x, -center.y)
         }
         update { it *= s }
@@ -75,10 +83,5 @@ internal fun ViewMat() = object : ViewMat {
     private fun getDst(inner: Rect, outer: Rect): Rect? {
         val scale = min(outer.width / inner.width, outer.height / inner.height)
         return Rect(Offset.Zero, inner.size * scale).centerIn(outer)
-//        return if(dst.similar(inner)) null else dst
-    }
-
-    private fun Rect.similar(other: Rect): Boolean {
-        return (intersect(other).area / area) > .95f
     }
 }

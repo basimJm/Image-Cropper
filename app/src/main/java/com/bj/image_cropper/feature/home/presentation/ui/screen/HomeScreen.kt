@@ -22,7 +22,6 @@ import com.bj.image_cropper.core.shared_ui.composable.AppButton
 import com.bj.image_cropper.core.shared_ui.composable.AppScreen
 import com.bj.image_cropper.core.shared_ui.composable.AppText
 import com.bj.image_cropper.core.shared_ui.theme.ImageCropperTheme
-import com.bj.image_cropper.core.shared_ui.utils.LocalSpacing
 import com.bj.image_cropper.core.shared_ui.utils.Sp
 import com.bj.image_cropper.feature.home.presentation.controller.contract.HomeContract.UiAction
 import com.bj.image_cropper.feature.home.presentation.controller.contract.HomeContract.UiState
@@ -39,7 +38,7 @@ fun HomeScreen(
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(LocalSpacing.current.spaceMedium)
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             state.imageUri?.let { imageUri ->
                 val painter = rememberAsyncImagePainter(imageUri)
@@ -56,7 +55,6 @@ fun HomeScreen(
                         .fillMaxWidth()
                         .height(500.dp), bitmap = image, contentDescription = null
                 )
-
             } ?: run {
                 AppText(
                     text = stringResource(R.string.no_image_selected),
