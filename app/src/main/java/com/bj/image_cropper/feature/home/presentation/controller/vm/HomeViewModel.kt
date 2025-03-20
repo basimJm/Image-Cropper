@@ -7,7 +7,6 @@ import com.bj.image_cropper.R
 import com.bj.image_cropper.compose_navigation.route.Routes
 import com.bj.image_cropper.core.mvi.MVI
 import com.bj.image_cropper.core.mvi.mvi
-import com.bj.image_cropper.core.utils.Extensions.toImageBitmap
 import com.bj.image_cropper.feature.home.presentation.controller.contract.HomeContract.SideEffect
 import com.bj.image_cropper.feature.home.presentation.controller.contract.HomeContract.UiAction
 import com.bj.image_cropper.feature.home.presentation.controller.contract.HomeContract.UiState
@@ -22,7 +21,7 @@ class HomeViewModel(saveStateHandle: SavedStateHandle) : ViewModel(),
             updateState { copy(imageUri = it) }
         }
         passedData.imagePath?.let {
-            updateState { copy(imagePath = it.toImageBitmap()) }
+            updateState { copy(imagePath = it) }
         }
     }
 

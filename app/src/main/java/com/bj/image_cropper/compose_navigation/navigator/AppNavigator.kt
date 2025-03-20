@@ -9,7 +9,5 @@ interface AppNavigator {
     fun registerGraph(navGraphBuilder: NavGraphBuilder)
     fun navigateTo(route: Routes)
     fun navigateBack()
-    fun navigateAndClearBackStack(
-        route: Routes,
-    )
+    fun navigateAndClearBackStack(route: Routes)
 }

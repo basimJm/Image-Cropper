@@ -22,7 +22,7 @@ fun ImageEditorScreen(
     pushEvent: (ImageEditorContract.UiAction) -> Unit
 ) {
     AppScreen(
-        withAppBar = true,
+        title = stringResource(R.string.edit_image),
         onBackPressed = { pushEvent(ImageEditorContract.UiAction.OnBackPressed) }, actions = listOf(
             AppBarAction(
                 icon = Icons.Default.Done,
@@ -36,7 +36,6 @@ fun ImageEditorScreen(
         if (state.imageCropper.cropState != null) {
             Column(
                 modifier = Modifier
-                    .padding(top = 50.dp)
                     .fillMaxSize()
             ) {
                 state.imageCropper.cropState?.let {

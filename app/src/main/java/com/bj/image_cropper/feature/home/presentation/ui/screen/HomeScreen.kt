@@ -1,5 +1,6 @@
 package com.bj.image_cropper.feature.home.presentation.ui.screen
 
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -50,10 +52,11 @@ fun HomeScreen(
                         .height(500.dp)
                 )
             } ?: state.imagePath?.let { image ->
+                val bitmap = BitmapFactory.decodeFile(image)
                 Image(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(500.dp), bitmap = image, contentDescription = null
+                        .height(500.dp), bitmap = bitmap.asImageBitmap(), contentDescription = null
                 )
             } ?: run {
                 AppText(

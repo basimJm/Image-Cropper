@@ -1,13 +1,12 @@
 package com.bj.image_cropper.feature.home.presentation.controller.contract
 
 import android.net.Uri
-import androidx.compose.ui.graphics.ImageBitmap
 import com.bj.image_cropper.R
 
 interface HomeContract {
     data class UiState(
         val imageUri: Uri? = null,
-        val imagePath: ImageBitmap? = null,
+        val imagePath: String? = null,
         val buttonTextResource: Int = R.string.selected_image_from_gallery
     )
 

@@ -42,7 +42,7 @@ internal fun ViewMat() = object : ViewMat {
 
     override fun zoom(center: Offset, scale: Float) {
         val currentScale = this.scale
-        val newScale = (currentScale * scale).coerceIn(0.5f, 1.0f)
+        val newScale = (currentScale * scale).coerceIn(0.5f, 1.2f)
         val scaleFactor = newScale / currentScale
         val s = Matrix().apply {
             translate(center.x - c0.x, center.y - c0.y)
