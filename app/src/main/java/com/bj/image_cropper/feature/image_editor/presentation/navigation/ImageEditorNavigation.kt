@@ -38,8 +38,10 @@ class ImageEditorNavigation(override val navController: NavHostController) :
                         ): String? {
                             imageBitmap?.let {
                                 val bitmap = imageBitmap.asAndroidBitmap()
-                                val file =
-                                    File(context.cacheDir, context.getString(R.string.image_type))
+                                val file = File(
+                                    context.cacheDir,
+                                    context.getString(R.string.image_path)
+                                )
                                 FileOutputStream(file).use {
                                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
                                 }
