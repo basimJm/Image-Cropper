@@ -62,7 +62,7 @@ class ImageEditorViewModel(savedStateHandle: SavedStateHandle, private val app: 
                     onEvent(UiAction.OnCropDone(result.bitmap))
                     updateState {
                         copy(
-                            bitmapImage = result.bitmap
+                            imageBitmap = result.bitmap
                         )
                     }
                 }

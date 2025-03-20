@@ -1,7 +1,9 @@
 package com.bj.image_cropper.feature.image_editor.presentation.ui.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
@@ -43,6 +45,7 @@ fun ImageEditorScreen(
                         state = it,
                         modifier = Modifier.weight(1f)
                     )
+                    Spacer(Modifier.height(20.dp))
                     CropperControls(
                         state = it,
                         modifier = Modifier

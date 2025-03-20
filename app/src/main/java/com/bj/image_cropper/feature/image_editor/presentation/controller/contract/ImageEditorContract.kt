@@ -9,7 +9,7 @@ import com.bj.image_cropper.feature.image_editor.presentation.ui.component.Image
 interface ImageEditorContract {
     data class UiState(
         val imageUri: Uri? = null,
-        val bitmapImage: ImageBitmap? = null,
+        val imageBitmap: ImageBitmap? = null,
         val cropState: CropState? = null,
         val imageCropper: ImageCropper = ImageCropper(),
         val error: CropError? = null

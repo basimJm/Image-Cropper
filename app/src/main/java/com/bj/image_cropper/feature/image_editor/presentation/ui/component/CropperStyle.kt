@@ -68,7 +68,7 @@ private val DefaultAspectRatios = listOf(
 )
 
 fun CropperStyle(
-    backgroundColor: Color = Color.Black,
+    backgroundColor: Color = Color.White,
     rectColor: Color = Color.White,
     rectStrokeWidth: Dp = 2.dp,
     touchRad: Dp = 10.dp,

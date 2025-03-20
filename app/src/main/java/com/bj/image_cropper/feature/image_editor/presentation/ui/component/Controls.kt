@@ -3,7 +3,6 @@ package com.bj.image_cropper.feature.image_editor.presentation.ui.component
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,9 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -39,24 +36,18 @@ internal fun CropperControls(
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
-        elevation = CardDefaults.cardElevation(defaultElevation = 16.dp),
-        shape = RoundedCornerShape(topStart = 50.dp, topEnd = 50.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.onSurface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        shape = RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         modifier = modifier
             .fillMaxWidth()
             .height(120.dp)
-            .shadow(
-                elevation = 16.dp,
-                shape = RoundedCornerShape(topStart = 50.dp, topEnd = 50.dp),
-                clip = false,
-                ambientColor = Color.Black,
-                spotColor = Color.Black,
-            ),
+
     ) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Row(modifier.horizontalScroll(rememberScrollState())) {
                 val aspects = LocalCropperStyle.current.aspects
-                val unselectedTint = MaterialTheme.colorScheme.surface
+                val unselectedTint = MaterialTheme.colorScheme.onSurface
                 val selectedTint = md_theme_button_disabled
 
                 IconButton(onClick = { state.reset() }) {
@@ -149,8 +140,6 @@ internal fun CropperControls(
                         color = if (isSelected) selectedTint else unselectedTint
                     )
                 }
-
-                Spacer(modifier = Modifier.weight(1f))
             }
         }
     }
