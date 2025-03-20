@@ -54,7 +54,6 @@ internal fun CropState(
     override var region
         get() = _region
         set(value) {
-//            _region = value
             _region = updateRegion(
                 old = _region, new = value,
                 bounds = imgRect, aspectLock = aspectLock
