@@ -16,15 +16,12 @@ import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.constrainResize
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.eq
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.keepAspect
-import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.next90
-import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.prev90
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.scaleToFit
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.setSize
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.toRect
 
-/** State for the current image being cropped */
 @Stable
-public interface CropState {
+interface CropState {
     val src: ImageSrc
     var transform: ImgTransform
     var region: Rect
@@ -92,30 +89,6 @@ internal fun CropState(
 internal fun getTransformedImageRect(transform: ImgTransform, size: IntSize): Rect {
     val dstMat = transform.asMatrix(size)
     return dstMat.map(size.toIntRect().toRect())
-}
-
-internal fun CropState.rotLeft() {
-    transform = transform.copy(angleDeg = transform.angleDeg.prev90())
-}
-
-internal fun CropState.rotRight() {
-    transform = transform.copy(angleDeg = transform.angleDeg.next90())
-}
-
-internal fun CropState.flipHorizontal() {
-    if ((transform.angleDeg / 90) % 2 == 0) flipX() else flipY()
-}
-
-internal fun CropState.flipVertical() {
-    if ((transform.angleDeg / 90) % 2 == 0) flipY() else flipX()
-}
-
-internal fun CropState.flipX() {
-    transform = transform.copy(scale = transform.scale.copy(x = -1 * transform.scale.x))
-}
-
-internal fun CropState.flipY() {
-    transform = transform.copy(scale = transform.scale.copy(y = -1 * transform.scale.y))
 }
 
 internal fun updateRegion(old: Rect, new: Rect, bounds: Rect, aspectLock: Boolean): Rect {

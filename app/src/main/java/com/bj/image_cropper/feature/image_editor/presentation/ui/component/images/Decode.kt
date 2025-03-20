@@ -8,12 +8,12 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.toIntRect
 import androidx.compose.ui.unit.toSize
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.align
-import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.inverted
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.containsInclusive
+import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.inverted
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.roundOut
 
- data class DecodeParams(val sampleSize: Int, val subset: IntRect)
- data class DecodeResult(val params: DecodeParams, val bmp: ImageBitmap)
+data class DecodeParams(val sampleSize: Int, val subset: IntRect)
+data class DecodeResult(val params: DecodeParams, val bmp: ImageBitmap)
 
 internal fun calculateSampleSize(imgRegion: IntSize, view: IntSize): Int {
     val imgArea = imgRegion.let { it.width.toDouble() * it.height }
@@ -25,7 +25,7 @@ private fun getImageSubset(
     view: IntSize, viewToImg: Matrix, imgRect: IntRect, align: Boolean
 ): IntRect {
     return viewToImg
-        .map(view.toSize().toRect()).let{ if(align) it.align(128) else it }
+        .map(view.toSize().toRect()).let { if (align) it.align(128) else it }
         .roundOut().intersect(imgRect)
 }
 

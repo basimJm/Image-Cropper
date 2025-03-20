@@ -16,7 +16,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -33,8 +32,6 @@ import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils
 private fun Size.isAspect(aspect: AspectRatio): Boolean {
     return ((width / height) - (aspect.x.toFloat() / aspect.y)).eq0()
 }
-
-internal val LocalVerticalControls = staticCompositionLocalOf { false }
 
 @Composable
 internal fun CropperControls(

@@ -13,51 +13,36 @@ import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-/** Image Aspect ratio. eg : AspectRatio(16, 9) */
- data class AspectRatio(val x: Int, val y: Int)
+data class AspectRatio(val x: Int, val y: Int)
 
- data class CropperStyleGuidelines(
+data class CropperStyleGuidelines(
     val count: Int = 2,
     val color: Color = Color.White,
     val width: Dp = .7f.dp,
 )
 
-/**
- * Style provider for the image cropper.
- */
 @Stable
- interface CropperStyle {
-    /** Backdrop for the image */
-     val backgroundColor: Color
+interface CropperStyle {
+    val backgroundColor: Color
 
-    /** Overlay color for regions outside of the crop rect */
-     val overlayColor: Color
+    val overlayColor: Color
 
-    /** Draws the crop rect [region], including the border and handles */
-     fun DrawScope.drawCropRect(region: Rect)
+    fun DrawScope.drawCropRect(region: Rect)
 
+    val handles: List<Offset>
 
-    /** Relative positions of the handles used for transforming the crop rect */
-     val handles: List<Offset>
+    val touchRad: Dp
 
-    /** The maximum distance between a handle's center and the touch position
-     * for it to be selected */
-     val touchRad: Dp
+    val shapes: List<CropShape>?
 
-    /** All available crop shapes */
-     val shapes: List<CropShape>?
+    val aspects: List<AspectRatio>
 
-    /** All available aspect ratios */
-     val aspects: List<AspectRatio>
-
-    /** Whether the view needs to be zoomed in automatically
-     * to fit the crop rect after any change */
-     val autoZoom: Boolean
+    val autoZoom: Boolean
 }
 
- val DefaultCropperStyle: CropperStyle by lazy { CropperStyle() }
+val DefaultCropperStyle: CropperStyle by lazy { CropperStyle() }
 
- val LocalCropperStyle = staticCompositionLocalOf { DefaultCropperStyle }
+val LocalCropperStyle = staticCompositionLocalOf { DefaultCropperStyle }
 
 private val MainHandles = listOf(
     Offset(0f, 0f), Offset(1f, 1f),
@@ -82,8 +67,7 @@ private val DefaultAspectRatios = listOf(
     AspectRatio(21, 9),
 )
 
-/** Creates a [CropperStyle] instance with the default behavior. */
- fun CropperStyle(
+fun CropperStyle(
     backgroundColor: Color = Color.Black,
     rectColor: Color = Color.White,
     rectStrokeWidth: Dp = 2.dp,

@@ -6,13 +6,10 @@ import androidx.compose.ui.graphics.Matrix
 import androidx.compose.ui.unit.IntSize
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.IdentityMat
 
-/**
- * Transformation applied on an image with [pivotRel] as pivot's relative position.
- */
- data class ImgTransform(val angleDeg: Int, val scale: Offset, val pivotRel: Offset) {
+data class ImgTransform(val angleDeg: Int, val scale: Offset, val pivotRel: Offset) {
     internal val hasTransform get() = angleDeg != 0 || scale != Offset(1f, 1f)
 
-     companion object {
+    companion object {
         @Stable
         internal val Identity = ImgTransform(0, Offset(1f, 1f), Offset(.5f, .5f))
     }

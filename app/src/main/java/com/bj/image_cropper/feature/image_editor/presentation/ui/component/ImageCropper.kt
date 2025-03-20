@@ -2,11 +2,13 @@ package com.bj.image_cropper.feature.image_editor.presentation.ui.component
 
 import android.content.Context
 import android.net.Uri
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.unit.IntSize
-import com.bj.image_cropper.feature.image_editor.presentation.ui.component.images.ImageBitmapSrc
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.images.ImageSrc
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.images.toImageSrc
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -19,73 +21,37 @@ import kotlinx.coroutines.withContext
 import java.io.File
 import java.util.UUID
 
-/** Union type denoting the possible results after a crop operation is done */
- sealed interface CropResult {
-    /** The final result as an ImageBitmap.
-     * use [asAndroidBitmap] if you need an [android.graphics.Bitmap].
-     */
+sealed interface CropResult {
     data class Success(val bitmap: ImageBitmap) : CropResult
 
-    /** The user has cancelled the operation or another session was started. */
     object Cancelled : CropResult
 }
 
- enum class CropError : CropResult {
-    /** The supplied image is invalid, not supported by the codec
-     * or you don't have the required permissions to read it */
+enum class CropError : CropResult {
     LoadingError,
-
-    /** The result could not be saved. Try reducing the maxSize supplied to [ImageCropper.crop] */
     SavingError
 }
 
- enum class CropperLoading {
-    /** The image is being prepared. */
+enum class CropperLoading {
     PreparingImage,
-
-    /** The user has accepted the cropped image and the result is being saved. */
     SavingResult,
 }
 
 internal val DefaultMaxCropSize = IntSize(3000, 3000)
 
-/**
- * State holder for the image cropper.
- * Allows starting new crop sessions as well as getting the state of the pending crop.
- */
 @Stable
- interface ImageCropper {
-    /** The pending crop state, if any */
+interface ImageCropper {
     val cropState: CropState?
 
     val loadingStatus: CropperLoading?
 
-    /**
-     * Initiates a new crop session, cancelling the current one, if any.
-     * Suspends until a result is available (cancellation, error, success) and returns it.
-     * The resulting image will be scaled down to fit [maxResultSize] (if provided).
-     * [createSrc] will be used to construct an [ImageSrc] instance.
-     */
     suspend fun crop(
         maxResultSize: IntSize? = DefaultMaxCropSize,
         createSrc: suspend () -> ImageSrc?
     ): CropResult
 }
 
-/**
- * Initiates a new crop session, cancelling the current one, if any.
- * Suspends until a result is available (cancellation, error, success) and returns it.
- * The resulting image will be scaled down to fit [maxResultSize] if provided.
- * [bmp] will be used as a source.
- */
- suspend fun ImageCropper.crop(
-    maxResultSize: IntSize? = DefaultMaxCropSize,
-    bmp: ImageBitmap
-): CropResult = crop(maxResultSize = maxResultSize) {
-    ImageBitmapSrc(bmp)
-}
-
- suspend fun ImageCropper.crop(
+suspend fun ImageCropper.crop(
     uri: Uri,
     context: Context,
     maxResultSize: IntSize? = DefaultMaxCropSize,
@@ -125,15 +91,7 @@ private suspend fun copy(src: Uri, dst: File, context: Context) = withContext(Di
     Uri.fromFile(dst)
 }
 
-@Composable
- fun rememberImageCropper(): ImageCropper {
-    return remember { ImageCropper() }
-}
-
-/**
- * Creates an [ImageCropper] instance.
- */
- fun ImageCropper(): ImageCropper = object : ImageCropper {
+fun ImageCropper(): ImageCropper = object : ImageCropper {
     override var cropState: CropState? by mutableStateOf(null)
     private val cropStateFlow = snapshotFlow { cropState }
     override var loadingStatus: CropperLoading? by mutableStateOf(null)
