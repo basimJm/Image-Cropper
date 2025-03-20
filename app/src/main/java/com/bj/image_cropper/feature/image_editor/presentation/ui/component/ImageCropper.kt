@@ -20,7 +20,7 @@ import java.io.File
 import java.util.UUID
 
 /** Union type denoting the possible results after a crop operation is done */
-public sealed interface CropResult {
+ sealed interface CropResult {
     /** The final result as an ImageBitmap.
      * use [asAndroidBitmap] if you need an [android.graphics.Bitmap].
      */
@@ -30,7 +30,7 @@ public sealed interface CropResult {
     object Cancelled : CropResult
 }
 
-public enum class CropError : CropResult {
+ enum class CropError : CropResult {
     /** The supplied image is invalid, not supported by the codec
      * or you don't have the required permissions to read it */
     LoadingError,
@@ -39,7 +39,7 @@ public enum class CropError : CropResult {
     SavingError
 }
 
-public enum class CropperLoading {
+ enum class CropperLoading {
     /** The image is being prepared. */
     PreparingImage,
 
@@ -54,7 +54,7 @@ internal val DefaultMaxCropSize = IntSize(3000, 3000)
  * Allows starting new crop sessions as well as getting the state of the pending crop.
  */
 @Stable
-public interface ImageCropper {
+ interface ImageCropper {
     /** The pending crop state, if any */
     val cropState: CropState?
 
@@ -78,14 +78,14 @@ public interface ImageCropper {
  * The resulting image will be scaled down to fit [maxResultSize] if provided.
  * [bmp] will be used as a source.
  */
-public suspend fun ImageCropper.crop(
+ suspend fun ImageCropper.crop(
     maxResultSize: IntSize? = DefaultMaxCropSize,
     bmp: ImageBitmap
 ): CropResult = crop(maxResultSize = maxResultSize) {
     ImageBitmapSrc(bmp)
 }
 
-public suspend fun ImageCropper.crop(
+ suspend fun ImageCropper.crop(
     uri: Uri,
     context: Context,
     maxResultSize: IntSize? = DefaultMaxCropSize,
@@ -126,14 +126,14 @@ private suspend fun copy(src: Uri, dst: File, context: Context) = withContext(Di
 }
 
 @Composable
-public fun rememberImageCropper(): ImageCropper {
+ fun rememberImageCropper(): ImageCropper {
     return remember { ImageCropper() }
 }
 
 /**
  * Creates an [ImageCropper] instance.
  */
-public fun ImageCropper(): ImageCropper = object : ImageCropper {
+ fun ImageCropper(): ImageCropper = object : ImageCropper {
     override var cropState: CropState? by mutableStateOf(null)
     private val cropStateFlow = snapshotFlow { cropState }
     override var loadingStatus: CropperLoading? by mutableStateOf(null)

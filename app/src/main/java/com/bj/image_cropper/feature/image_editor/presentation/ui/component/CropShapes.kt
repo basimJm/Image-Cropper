@@ -1,4 +1,4 @@
-package com.mr0xf00.easycrop
+package com.bj.image_cropper.feature.image_editor.presentation.ui.component
 
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.geometry.CornerRadius
@@ -7,24 +7,19 @@ import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.graphics.Path
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.polygonPath
 
-/**
- * A Shape used to clip the resulting image.
- * Implementations should provide a meaningful equals method,
- * such as (A == B) => A.asPath(R) == B.asPath(R)
- */
 @Stable
 fun interface CropShape {
     fun asPath(rect: Rect): Path
 }
 
 @Stable
-public val RectCropShape = CropShape { rect -> Path().apply { addRect(rect) } }
+ val RectCropShape = CropShape { rect -> Path().apply { addRect(rect) } }
 
 @Stable
-public val CircleCropShape = CropShape { rect -> Path().apply { addOval(rect) } }
+ val CircleCropShape = CropShape { rect -> Path().apply { addOval(rect) } }
 
 @Stable
-public val TriangleCropShape = CropShape { rect ->
+ val TriangleCropShape = CropShape { rect ->
     Path().apply {
         moveTo(rect.left, rect.bottom)
         lineTo(rect.center.x, rect.top)
@@ -33,7 +28,7 @@ public val TriangleCropShape = CropShape { rect ->
     }
 }
 
-public val StarCropShape = CropShape { rect ->
+ val StarCropShape = CropShape { rect ->
     polygonPath(
         tx = rect.left, ty = rect.top,
         sx = rect.width / 32, sy = rect.height / 32,
@@ -52,7 +47,7 @@ public val StarCropShape = CropShape { rect ->
     )
 }
 
-public data class RoundRectCropShape(private val cornersPercent: Int) : CropShape {
+ data class RoundRectCropShape(private val cornersPercent: Int) : CropShape {
     override fun asPath(rect: Rect): Path {
         val radius = CornerRadius(rect.minDimension * cornersPercent / 100f)
         return Path().apply { addRoundRect(RoundRect(rect = rect, radius)) }

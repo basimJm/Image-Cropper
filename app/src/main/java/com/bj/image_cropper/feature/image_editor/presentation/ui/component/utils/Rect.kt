@@ -3,11 +3,15 @@ package com.bj.image_cropper.feature.image_editor.presentation.ui.component.util
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntRect
 import androidx.compose.ui.unit.IntSize
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.AspectRatio
-import kotlin.math.*
+import kotlin.math.absoluteValue
+import kotlin.math.ceil
+import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.sqrt
 
 internal fun IntRect.toRect() = Rect(
     left = left.toFloat(), top = top.toFloat(),
@@ -24,8 +28,6 @@ internal fun Size.coerceAtMost(maxSize: Size): Size {
 }
 
 internal fun Rect.atOrigin(): Rect = Rect(offset = Offset.Zero, size = size)
-
-internal val Rect.area get() = width * height
 
 internal fun Rect.lerp(target: Rect, p: Float): Rect {
     val tl0 = topLeft
@@ -48,12 +50,6 @@ internal fun Rect.scale(sx: Float, sy: Float) = setSizeTL(width = width * sx, he
 internal fun Rect.setSizeTL(width: Float, height: Float) =
     Rect(offset = topLeft, size = Size(width, height))
 
-internal fun Rect.setSizeBR(width: Float, height: Float) =
-    Rect(bottom = bottom, right = right, left = right - width, top = bottom - height)
-
-internal fun Rect.setSizeCenter(width: Float, height: Float) =
-    Rect(offset = Offset(center.x - width / 2, center.y - height / 2), size = Size(width, height))
-
 internal fun Rect.constrainResize(bounds: Rect): Rect = Rect(
     left = left.coerceAtLeast(bounds.left),
     top = top.coerceAtLeast(bounds.top),
@@ -68,15 +64,6 @@ internal fun Rect.constrainOffset(bounds: Rect): Rect {
     if (x < bounds.left) x += bounds.left - x
     if (y < bounds.top) y += bounds.top - y
     return Rect(Offset(x, y), size)
-}
-
-internal fun IntRect.constrainOffset(bounds: IntRect): IntRect {
-    var (x, y) = topLeft
-    if (right > bounds.right) x += bounds.right - right
-    if (bottom > bounds.bottom) y += bounds.bottom - bottom
-    if (x < bounds.left) x += bounds.left - x
-    if (y < bounds.top) y += bounds.top - y
-    return IntRect(IntOffset(x, y), size)
 }
 
 internal fun Rect.resize(

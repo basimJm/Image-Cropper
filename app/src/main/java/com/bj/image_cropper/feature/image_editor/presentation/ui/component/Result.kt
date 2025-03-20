@@ -16,12 +16,7 @@ import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-/**
- * Creates an [ImageBitmap] using the parameters in [CropState].
- * If [maxSize] is not null, the result will be scaled down to match it.
- * Returns null if the image could not be created.
- */
-public suspend fun CropState.createResult(
+suspend fun CropState.createResult(
     maxSize: IntSize?
 ): ImageBitmap? = withContext(Dispatchers.Default) {
     runCatching { doCreateResult(maxSize) }

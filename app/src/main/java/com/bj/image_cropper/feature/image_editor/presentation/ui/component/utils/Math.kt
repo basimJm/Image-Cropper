@@ -1,16 +1,15 @@
 package com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils
 
-import androidx.compose.ui.geometry.Offset
-import kotlin.math.*
+import kotlin.math.abs
+import kotlin.math.ceil
+import kotlin.math.floor
+import kotlin.math.round
+import kotlin.math.roundToInt
 
 private const val Eps: Float = 2.4414062E-4f
 
 internal fun Float.eq0(): Boolean = abs(this) <= Eps
 internal infix fun Float.eq(v: Float): Boolean = abs(v - this) <= Eps
-internal fun Offset.eq(other: Offset) = x.eq(other.x) && y.eq(other.y)
-
-internal fun lerp(a: Float, b: Float, p: Float): Float = a + p * (b - a)
-internal fun lerp(a: Int, b: Int, p: Float) = lerp(a.toFloat(), b.toFloat(), p).roundToInt()
 
 internal fun lerpAngle(a: Int, b: Int, p: Float): Int {
     val angleDist = (2 * ((b - a) % 360) % 360 - (b - a) % 360)

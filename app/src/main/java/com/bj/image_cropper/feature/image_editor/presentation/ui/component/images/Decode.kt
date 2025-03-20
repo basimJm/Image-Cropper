@@ -12,8 +12,8 @@ import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.containsInclusive
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.roundOut
 
-public data class DecodeParams(val sampleSize: Int, val subset: IntRect)
-public data class DecodeResult(val params: DecodeParams, val bmp: ImageBitmap)
+ data class DecodeParams(val sampleSize: Int, val subset: IntRect)
+ data class DecodeResult(val params: DecodeParams, val bmp: ImageBitmap)
 
 internal fun calculateSampleSize(imgRegion: IntSize, view: IntSize): Int {
     val imgArea = imgRegion.let { it.width.toDouble() * it.height }

@@ -9,7 +9,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.pointer.*
+import androidx.compose.ui.input.pointer.PointerEvent
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.PointerId
+import androidx.compose.ui.input.pointer.PointerInputChange
+import androidx.compose.ui.input.pointer.changedToDown
+import androidx.compose.ui.input.pointer.changedToUp
+import androidx.compose.ui.input.pointer.pointerInput
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlin.math.max
@@ -41,14 +47,6 @@ internal inline fun DragState(
 internal interface TapState {
     fun onTap(x: Float, y: Float, pointers: Int) = Unit
     fun onLongPress(x: Float, y: Float, pointers: Int) = Unit
-}
-
-internal inline fun TapState(
-    crossinline longPress: (pos: Offset, pointers: Int) -> Unit = { _, _ -> },
-    crossinline tap: (pos: Offset, pointers: Int) -> Unit = { _, _ -> },
-) = object : TapState {
-    override fun onTap(x: Float, y: Float, pointers: Int) = tap(Offset(x, y), pointers)
-    override fun onLongPress(x: Float, y: Float, pointers: Int) = longPress(Offset(x, y), pointers)
 }
 
 internal interface ZoomState {

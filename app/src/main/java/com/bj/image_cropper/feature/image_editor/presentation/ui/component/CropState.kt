@@ -21,8 +21,6 @@ import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.scaleToFit
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.setSize
 import com.bj.image_cropper.feature.image_editor.presentation.ui.component.utils.toRect
-import com.mr0xf00.easycrop.CropShape
-import com.mr0xf00.easycrop.RectCropShape
 
 /** State for the current image being cropped */
 @Stable
