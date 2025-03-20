@@ -46,7 +46,7 @@ fun ImageEditorScreen(
                     CropperControls(
                         state = it,
                         modifier = Modifier
-                            .padding(12.dp),
+                            .padding(horizontal = 12.dp),
                     )
                 }
             }

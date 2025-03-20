@@ -21,6 +21,6 @@ interface ImageEditorContract {
     }
 
     sealed interface SideEffect {
-        data class BackToHomeScreen(val bitmapImage: ImageBitmap?, val imageUri: Uri?) : SideEffect
+        data class BackToHomeScreen(val bitmapImage: ImageBitmap?) : SideEffect
     }
 }

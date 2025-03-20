@@ -36,11 +36,11 @@ class ImageEditorViewModel(savedStateHandle: SavedStateHandle, private val app: 
         viewModelScope.launch {
             when (event) {
                 is UiAction.OnBackPressed -> {
-                    emitSideEffect(BackToHomeScreen(null, uiState.value.imageUri))
+                    emitSideEffect(BackToHomeScreen(null))
                 }
 
                 is UiAction.OnCropDone -> {
-                    emitSideEffect(BackToHomeScreen(event.bitmapImage, null))
+                    emitSideEffect(BackToHomeScreen(event.bitmapImage))
                 }
             }
         }

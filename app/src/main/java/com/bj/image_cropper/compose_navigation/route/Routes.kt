@@ -9,13 +9,8 @@ import kotlinx.serialization.Serializable
 sealed interface Routes {
     @Serializable
     data class Home(
-        val imageUri: String? = null,
-        val imagePath: String? = null,
-
-        ) : Routes {
-        val uriObject: Uri?
-            get() = imageUri?.toUri()
-
+        val imagePath: String? = null
+    ) : Routes {
         companion object {
             fun from(savedStateHandle: SavedStateHandle) =
                 savedStateHandle.toRoute<Home>()
