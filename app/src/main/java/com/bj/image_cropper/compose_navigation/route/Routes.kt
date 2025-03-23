@@ -18,13 +18,13 @@ sealed interface Routes {
     }
 
     @Serializable
-    data class ImageEditor(val imageUri: String) : Routes {
+    data class ImageCropper(val imageUri: String) : Routes {
         val uriObject: Uri
             get() = imageUri.toUri()
 
         companion object {
             fun from(savedStateHandle: SavedStateHandle) =
-                savedStateHandle.toRoute<ImageEditor>()
+                savedStateHandle.toRoute<ImageCropper>()
         }
     }
 }

@@ -31,8 +31,8 @@ class HomeNavigation(override val navController: NavHostController) :
                         )
                     }
 
-                    is HomeContract.SideEffect.NavigateToImageEditorScreen -> {
-                        navigateTo(Routes.ImageEditor(sideEffect.uri.toString()))
+                    is HomeContract.SideEffect.NavigateToImageCropperScreen -> {
+                        navigateTo(Routes.ImageCropper(sideEffect.uri.toString()))
                     }
                 }
             }
