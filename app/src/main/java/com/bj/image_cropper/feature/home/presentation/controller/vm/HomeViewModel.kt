@@ -39,12 +39,12 @@ class HomeViewModel(private val saveStateHandle: SavedStateHandle) : ViewModel()
                     emitSideEffect(SideEffect.ShowMessageFromRes(R.string.image_selected_successfully))
                 }
 
-                UiAction.OnNavigateToImageEditorScreen -> {
-                    emitSideEffect(
-                        SideEffect.NavigateToImageEditorScreen(
-                            uiState.value.imageUri!!
+                UiAction.OnNavigateToImageCropperScreen -> {
+                    uiState.value.imageUri?.let {
+                        emitSideEffect(
+                            SideEffect.NavigateToImageCropperScreen(it)
                         )
-                    )
+                    }
                 }
             }
         }

@@ -12,11 +12,11 @@ interface HomeContract {
 
     sealed interface UiAction {
         data class OnImageSelected(val uri: Uri) : UiAction
-        data object OnNavigateToImageEditorScreen : UiAction
+        data object OnNavigateToImageCropperScreen : UiAction
     }
 
     sealed interface SideEffect {
         data class ShowMessageFromRes(val resId: Int) : SideEffect
-        data class NavigateToImageEditorScreen(val uri: Uri) : SideEffect
+        data class NavigateToImageCropperScreen(val uri: Uri) : SideEffect
     }
 }

@@ -78,7 +78,7 @@ fun HomeScreen(
                 )
             ) {
                 state.imageUri?.let {
-                    pushEvent(UiAction.OnNavigateToImageEditorScreen)
+                    pushEvent(UiAction.OnNavigateToImageCropperScreen)
                 } ?: run {
                     getImage.launch(context.getString(R.string.image_type))
                 }
